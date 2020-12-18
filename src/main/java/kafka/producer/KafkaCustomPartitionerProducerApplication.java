@@ -6,10 +6,14 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Properties;
 import java.util.UUID;
 
 public class KafkaCustomPartitionerProducerApplication {
+    private static Logger logger = LoggerFactory.getLogger(KafkaCustomPartitionerProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();
@@ -23,7 +27,7 @@ public class KafkaCustomPartitionerProducerApplication {
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer(properties);
         try {
             ProducerRecord record;
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 1; i++) {
 
                 /*
                  This will use custom partitioner KeyValueHashPartitioner configured in PARTITIONER_CLASS_CONFIG
@@ -33,7 +37,7 @@ public class KafkaCustomPartitionerProducerApplication {
 
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("Exception occurred while producing message : ", ex);
         } finally {
             kafkaProducer.close();
         }
