@@ -28,7 +28,7 @@ public class KafkaKeyHashModProducerApplication {
                 /*
                  This will use DefaultPartitioner(key mod-hash) as key is provided but partition id or custom partitioner is not set
                 */
-                record = new ProducerRecord(KafkaConstants.MULTI_PARTITION_TOPIC_NAME, Integer.toString(i), String.format("Message with Key Mod-Hash Partitioner %d:%s", i, UUID.randomUUID().toString()));
+                record = new ProducerRecord(KafkaConstants.MULTI_PARTITION_TOPIC_NAME, Integer.toString(i), String.format("Message with Key Mod-Hash Partitioner:%s", UUID.randomUUID().toString()));
                 kafkaProducer.send(record);
             }
         } catch (Exception ex) {

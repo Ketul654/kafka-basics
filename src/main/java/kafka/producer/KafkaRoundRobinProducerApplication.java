@@ -28,7 +28,7 @@ public class KafkaRoundRobinProducerApplication {
                 /*
                  This will use DefaultPartitioner(round-robin) as only topic and value are provided.
                 */
-                record = new ProducerRecord(KafkaConstants.MULTI_PARTITION_TOPIC_NAME, String.format("Message %d with Round Robin Partitioner Strategy:%s", i, UUID.randomUUID().toString()));
+                record = new ProducerRecord(KafkaConstants.MULTI_PARTITION_TOPIC_NAME, String.format("Message with Round Robin Partitioner Strategy:%s", UUID.randomUUID().toString()));
                 kafkaProducer.send(record);
             }
         } catch (Exception ex) {
