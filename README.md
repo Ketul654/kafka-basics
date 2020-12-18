@@ -71,10 +71,67 @@
 
 * Create topic
 
-  ```bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 3 --partitions 1 --topic first-topic```
-* Check if topic is created 
+  ```
+  bin/kafka-topics.sh --create --bootstrap-server localhost:9092 \
+  --replication-factor 3 \
+  --partitions 1 \
+  --topic first-topic
+  ```
+  
+  ```
+  bin/kafka-topics.sh --create --bootstrap-server localhost:9092 \
+  --replication-factor 3 \
+  --partitions 3 \
+  --topic multi-partition-topic
+  ```
+* Check if topics are created 
 
-  ```bin/kafka-topics.sh --list --zookeeper localhost:2181```     
+  ```$xslt
+  [ kafka_2.13-2.6.0 % bin/kafka-topics.sh --list --zookeeper localhost:2181                                                                      
+  __consumer_offsets
+  first-topic
+  multi-partition-topic
+  ```  
+  
+* Check topic description
+  ```$xslt
+  [ kafka_2.13-2.6.0 % bin/kafka-topics.sh --describe --topic first-topic --zookeeper localhost:2181
+  Topic: first-topic	PartitionCount: 1	ReplicationFactor: 3	Configs: 
+  	Topic: first-topic	Partition: 0	Leader: 1	Replicas: 1,2,0	Isr: 1,2,0
+  ```    
+
+* You can clear kafka topic by updating retention config
+
+  ```$xslt
+  [ kafka_2.13-2.6.0 % bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --alter \
+  --entity-type topics \
+  --entity-name multi-partition-topic \
+  --add-config retention.ms=1
+  Completed updating config for topic multi-partition-topic.
+  ```  
+  
+  You can check if config is updated
+  
+  ```$xslt
+  [ kafka_2.13-2.6.0 % bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --describe \
+  --entity-type topics \
+  --entity-name multi-partition-topic
+  Dynamic configs for topic multi-partition-topic are:
+    retention.ms=1000 sensitive=false synonyms={DYNAMIC_TOPIC_CONFIG:retention.ms=1000}
+  ```
+  
+  Make sure you remove this retention config or reset it to previous value once topic is purged otherwise it will keep purging.
+  
+  ```$xslt
+  [ kafka_2.13-2.6.0 % bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --alter \
+  --entity-type topics \
+  --entity-name multi-partition-topic \
+  --delete-config retention.ms                           
+  Completed updating config for topic multi-partition-topic.
+  ```
 ## Kafka Console Producer
 
 * Start console producer and produce messages
@@ -87,10 +144,13 @@
   >
   ```
   
-  You can also produce message with key using below command
+* You can also produce message with key using below command
   
   ```$xslt
-  [ kafka_2.13-2.6.0 % bin/kafka-console-producer.sh --broker-list localhost:9092 --topic first-topic --property parse.key=true --property key.separator=":"
+  [ kafka_2.13-2.6.0 % bin/kafka-console-producer.sh --broker-list localhost:9092 \
+  --topic first-topic \
+  --property parse.key=true \
+  --property key.separator=":"
   >name:ketul
   >localtion:glasgow
   ```
@@ -99,8 +159,28 @@
 * Start console consumer to consume messages produced by producer
   
   ```
-  [ kafka_2.13-2.6.0 % bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first-topic --property print.key=true --property print.value=true --from-beginning 
+  [ kafka_2.13-2.6.0 % bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 \
+  --topic first-topic \
+  --property print.key=true \
+  --property print.value=true \
+  --from-beginning 
   null	Hi
   null	How are you ?
   null	This is my first message
+  ```
+* You can also consume from a specific partition of a topic
+  
+  ```$xslt
+  [ kafka_2.13-2.6.0 % bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 \
+  --topic multi-partition-topic \
+  --property print.key=true \
+  --property print.value=true \
+  --from-beginning \
+  --partition 1
+  0	Message 0 to direct partition 1:e557cef7-7086-4b3f-a0e7-7b9e9e408cc2
+  1	Message 1 to direct partition 1:17b0b376-cc6c-4b32-b3c3-40ab987da240
+  2	Message 2 to direct partition 1:0be00510-abfc-4474-a379-db3685407ea5
+  3	Message 3 to direct partition 1:68a16e86-5985-4019-8619-ce4fad7f32dc
+  4	Message 4 to direct partition 1:431dcc32-ba86-49b8-9386-a81b9f2e206e
+  5	Message 5 to direct partition 1:2f108526-327c-4fcf-b4ba-8d45dc9fab71
   ```
