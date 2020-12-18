@@ -86,6 +86,14 @@
   >This is my first message
   >
   ```
+  
+  You can also produce message with key using below command
+  
+  ```$xslt
+  [ kafka_2.13-2.6.0 % bin/kafka-console-producer.sh --broker-list localhost:9092 --topic first-topic --property parse.key=true --property key.separator=":"
+  >name:ketul
+  >localtion:glasgow
+  ```
 ## Kafka Console Consumer
 
 * Start console consumer to consume messages produced by producer
