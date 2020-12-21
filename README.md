@@ -75,7 +75,7 @@
   bin/kafka-topics.sh --create --bootstrap-server localhost:9092 \
   --replication-factor 3 \
   --partitions 1 \
-  --topic first-topic
+  --topic single-partition-topic
   ```
   
   ```
@@ -89,15 +89,15 @@
   ```$xslt
   [ kafka_2.13-2.6.0 % bin/kafka-topics.sh --list --zookeeper localhost:2181                                                                      
   __consumer_offsets
-  first-topic
+  single-partition-topic
   multi-partition-topic
   ```  
   
 * Check topic description
   ```$xslt
-  [ kafka_2.13-2.6.0 % bin/kafka-topics.sh --describe --topic first-topic --zookeeper localhost:2181
-  Topic: first-topic	PartitionCount: 1	ReplicationFactor: 3	Configs: 
-  	Topic: first-topic	Partition: 0	Leader: 1	Replicas: 1,2,0	Isr: 1,2,0
+  [ kafka_2.13-2.6.0 % bin/kafka-topics.sh --describe --topic single-partition-topic --zookeeper localhost:2181
+  Topic: single-partition-topic	PartitionCount: 1	ReplicationFactor: 3	Configs: 
+  	Topic: single-partition-topic	Partition: 0	Leader: 1	Replicas: 1,2,0	Isr: 1,2,0
   ```    
 
 * You can clear kafka topic by updating retention config
@@ -137,7 +137,7 @@
 * Start console producer and produce messages
 
   ```
-  [ kafka_2.13-2.6.0 % bin/kafka-console-producer.sh --broker-list localhost:9092 --topic first-topic
+  [ kafka_2.13-2.6.0 % bin/kafka-console-producer.sh --broker-list localhost:9092 --topic single-partition-topic
   >Hi
   >How are you ?
   >This is my first message
@@ -148,7 +148,7 @@
   
   ```$xslt
   [ kafka_2.13-2.6.0 % bin/kafka-console-producer.sh --broker-list localhost:9092 \
-  --topic first-topic \
+  --topic single-partition-topic \
   --property parse.key=true \
   --property key.separator=":"
   >name:ketul
@@ -160,7 +160,7 @@
   
   ```
   [ kafka_2.13-2.6.0 % bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 \
-  --topic first-topic \
+  --topic single-partition-topic \
   --property print.key=true \
   --property print.value=true \
   --from-beginning 
