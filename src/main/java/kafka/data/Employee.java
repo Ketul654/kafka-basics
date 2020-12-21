@@ -5,6 +5,9 @@ public class Employee {
     private int age;
     private Department department;
 
+    // This default constructor is needed for deserializer
+    public Employee(){}
+
     public Employee(String name, int age, Department department) {
         this.name = name;
         this.age = age;
