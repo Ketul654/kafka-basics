@@ -21,7 +21,7 @@ public class KafkaConfigProducerApplication {
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         // Other configs
-        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, KafkaConstants.COMPRESSION_TYPE);
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, KafkaConstants.GZIP_COMPRESSION_TYPE);
         properties.put(ProducerConfig.RETRIES_CONFIG, KafkaConstants.RETRIES);
         properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, KafkaConstants.RETRY_BACKOFF_MS);
         properties.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, KafkaConstants.DELIVERY_TIMEOUT_MS); // this should be >= LINGER_MS_CONFIG + REQUEST_TIMEOUT_MS_CONFIG
@@ -37,10 +37,10 @@ public class KafkaConfigProducerApplication {
         properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, KafkaConstants.ENABLE_IDEMPOTENCE);
         properties.put(ProducerConfig.METADATA_MAX_IDLE_CONFIG, KafkaConstants.METADATA_MAX_IDLE);
         properties.put(ProducerConfig.METADATA_MAX_AGE_CONFIG, KafkaConstants.METADATA_MAX_AGE_MS);
-        properties.put(ProducerConfig.RECONNECT_BACKOFF_MAX_MS_CONFIG, 10000);
+        properties.put(ProducerConfig.RECONNECT_BACKOFF_MAX_MS_CONFIG, KafkaConstants.RECONNECT_BACKOFF_MAX_MS);
         properties.put(ProducerConfig.RECONNECT_BACKOFF_MS_CONFIG, KafkaConstants.RECONNECT_BACKOFF_MS);
-        properties.put(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, KafkaConstants.TRANSACTION_TIMEOUT);
-        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, KafkaConstants.TRANSACTIONAL_ID);
+        //properties.put(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, KafkaConstants.TRANSACTION_TIMEOUT);
+        //properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, KafkaConstants.TRANSACTIONAL_ID);
 
 
         //sendMessage(properties, "0");
