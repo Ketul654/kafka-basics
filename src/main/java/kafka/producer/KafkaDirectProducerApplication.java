@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class KafkaDirectProducerApplication {
-    private static Logger logger = LoggerFactory.getLogger(KafkaDirectProducerApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaDirectProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();

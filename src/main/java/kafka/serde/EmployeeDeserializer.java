@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class EmployeeDeserializer implements Deserializer<Employee> {
-    private Logger logger = LoggerFactory.getLogger(EmployeeDeserializer.class);
+    private final Logger logger = LoggerFactory.getLogger(EmployeeDeserializer.class);
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {

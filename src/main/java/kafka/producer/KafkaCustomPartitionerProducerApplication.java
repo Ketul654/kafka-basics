@@ -13,7 +13,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class KafkaCustomPartitionerProducerApplication {
-    private static Logger logger = LoggerFactory.getLogger(KafkaCustomPartitionerProducerApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaCustomPartitionerProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();

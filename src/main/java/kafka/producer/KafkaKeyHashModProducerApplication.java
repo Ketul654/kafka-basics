@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class KafkaKeyHashModProducerApplication {
-    private static Logger logger = LoggerFactory.getLogger(KafkaKeyHashModProducerApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaKeyHashModProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();

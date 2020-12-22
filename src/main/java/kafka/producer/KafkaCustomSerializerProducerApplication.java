@@ -14,7 +14,7 @@ import java.util.Properties;
 import java.util.Random;
 
 public class KafkaCustomSerializerProducerApplication {
-    private static Logger logger = LoggerFactory.getLogger(KafkaCustomPartitionerProducerApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaCustomPartitionerProducerApplication.class);
 
     public static void main(String[] args) {
         Properties properties = new Properties();

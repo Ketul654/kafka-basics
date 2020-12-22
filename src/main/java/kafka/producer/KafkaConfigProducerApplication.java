@@ -20,26 +20,27 @@ public class KafkaConfigProducerApplication {
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
-        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "gzip");
-        properties.put(ProducerConfig.RETRIES_CONFIG, 3);
-        properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, 1000);
-        properties.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, 40000); // this should be >= LINGER_MS_CONFIG + REQUEST_TIMEOUT_MS_CONFIG
-        properties.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, 20000);
-        properties.put(ProducerConfig.LINGER_MS_CONFIG, 10000);
-        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 5);
-        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 32000);
-        properties.put(ProducerConfig.CLIENT_DNS_LOOKUP_CONFIG, "resolve_canonical_bootstrap_servers_only");
-        properties.put(ProducerConfig.CLIENT_ID_CONFIG, "ketul-producer");
-        properties.put(ProducerConfig.CONNECTIONS_MAX_IDLE_MS_CONFIG, 10000);
-        properties.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 120000);
-        properties.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, 10000);
-        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
-        properties.put(ProducerConfig.METADATA_MAX_IDLE_CONFIG, 600000);
-        properties.put(ProducerConfig.METADATA_MAX_AGE_CONFIG, 120000);
+        // Other configs
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, KafkaConstants.COMPRESSION_TYPE);
+        properties.put(ProducerConfig.RETRIES_CONFIG, KafkaConstants.RETRIES);
+        properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, KafkaConstants.RETRY_BACKOFF_MS);
+        properties.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, KafkaConstants.DELIVERY_TIMEOUT_MS); // this should be >= LINGER_MS_CONFIG + REQUEST_TIMEOUT_MS_CONFIG
+        properties.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, KafkaConstants.REQUEST_TIMEOUT_MS);
+        properties.put(ProducerConfig.LINGER_MS_CONFIG, KafkaConstants.LINGER_MS);
+        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, KafkaConstants.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION);
+        properties.put(ProducerConfig.BATCH_SIZE_CONFIG, KafkaConstants.BATCH_SIZE);
+        properties.put(ProducerConfig.CLIENT_DNS_LOOKUP_CONFIG, KafkaConstants.CLIENT_DNS_LOOKUP);
+        properties.put(ProducerConfig.CLIENT_ID_CONFIG, KafkaConstants.CLIENT_ID);
+        properties.put(ProducerConfig.CONNECTIONS_MAX_IDLE_MS_CONFIG, KafkaConstants.CONNECTIONS_MAX_IDLE_MS);
+        properties.put(ProducerConfig.MAX_BLOCK_MS_CONFIG, KafkaConstants.MAX_BLOCK_MS);
+        properties.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, KafkaConstants.MAX_REQUEST_SIZE);
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, KafkaConstants.ENABLE_IDEMPOTENCE);
+        properties.put(ProducerConfig.METADATA_MAX_IDLE_CONFIG, KafkaConstants.METADATA_MAX_IDLE);
+        properties.put(ProducerConfig.METADATA_MAX_AGE_CONFIG, KafkaConstants.METADATA_MAX_AGE_MS);
         properties.put(ProducerConfig.RECONNECT_BACKOFF_MAX_MS_CONFIG, 10000);
-        properties.put(ProducerConfig.RECONNECT_BACKOFF_MS_CONFIG, 200);
-        properties.put(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, 30000);
-        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "tran-1");
+        properties.put(ProducerConfig.RECONNECT_BACKOFF_MS_CONFIG, KafkaConstants.RECONNECT_BACKOFF_MS);
+        properties.put(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, KafkaConstants.TRANSACTION_TIMEOUT);
+        properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, KafkaConstants.TRANSACTIONAL_ID);
 
 
         //sendMessage(properties, "0");

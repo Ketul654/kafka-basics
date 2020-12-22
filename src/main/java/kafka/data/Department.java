@@ -6,7 +6,7 @@ public enum Department {
     IT_ENGINEERING("Information Technology Engineering"),
     MECHANICAL_ENGINEERING("Mechanical Engineering");
 
-    private String departmentName;
+    private final String departmentName;
 
     Department(String departmentName) {
         this.departmentName = departmentName;

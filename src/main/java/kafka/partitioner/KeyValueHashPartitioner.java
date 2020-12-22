@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class KeyValueHashPartitioner implements Partitioner {
-    private static Logger logger = LoggerFactory.getLogger(KeyValueHashPartitioner.class);
+    private static final Logger logger = LoggerFactory.getLogger(KeyValueHashPartitioner.class);
     @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
         List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);

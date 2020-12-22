@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class EmployeeSerializer implements Serializer<Employee> {
 
-    private Logger logger = LoggerFactory.getLogger(EmployeeSerializer.class);
+    private final Logger logger = LoggerFactory.getLogger(EmployeeSerializer.class);
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
         logger.info("Initializing Employee Serializer with {} configs", configs);

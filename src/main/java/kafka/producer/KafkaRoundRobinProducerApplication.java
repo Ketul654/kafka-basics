@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class KafkaRoundRobinProducerApplication {
-    private static Logger logger = LoggerFactory.getLogger(KafkaRoundRobinProducerApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaRoundRobinProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();

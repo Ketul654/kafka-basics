@@ -17,14 +17,16 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class KafkaConsumerSubscribeApplication {
-    private static Logger logger = LoggerFactory.getLogger(KafkaConsumerSubscribeApplication.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(KafkaConsumerSubscribeApplication.class);
+
     public static void main(String[] args) {
 
         Properties properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.BOOTSTRAP_SERVERS);
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, EmployeeDeserializer.class.getName());
-        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        //properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
 
         ArrayList<String> topics = new ArrayList<String>();
