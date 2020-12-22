@@ -1,5 +1,6 @@
 package kafka.producer;
 
+import kafka.metrics.ProducerMetricsReporter;
 import kafka.utils.KafkaConstants;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -27,6 +28,12 @@ public class KafkaCompressedMessageProducerApplication {
         properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, KafkaConstants.GZIP_COMPRESSION_TYPE);
 
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer(properties);
+
+        // Stating metrics reporter
+        ProducerMetricsReporter reporter = new ProducerMetricsReporter(kafkaProducer);
+        Thread thread = new Thread(reporter);
+        thread.start();
+
         try {
             for (int i = 0; i < 1000000; i++) {
                 ProducerRecord record = new ProducerRecord(KafkaConstants.MULTI_PARTITION_TOPIC_NAME, String.format("Compressed Message :%s", UUID.randomUUID().toString()));
@@ -36,6 +43,7 @@ public class KafkaCompressedMessageProducerApplication {
             logger.error("Exception occurred while producing message : ", ex);
         } finally {
             kafkaProducer.close();
+            reporter.stop();
         }
     }
 }
