@@ -1,5 +1,6 @@
 package kafka.consumer;
 
+import kafka.producer.KafkaCompressedMessageProducerApplication;
 import kafka.utils.KafkaConstants;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -7,12 +8,15 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Properties;
 
 public class KafkaConsumerAssignApplication {
+    private static final Logger logger = LoggerFactory.getLogger(KafkaConsumerAssignApplication.class);
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.BOOTSTRAP_SERVERS);
@@ -34,12 +38,12 @@ public class KafkaConsumerAssignApplication {
             while (true) {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(10));
                 for (ConsumerRecord<String, String> record : records) {
-                    System.out.println(String.format("Topic : %s, Partition : %s, Offset : %s, Key : %s, Value : %s",
+                    logger.info(String.format("Topic : %s, Partition : %s, Offset : %s, Key : %s, Value : %s",
                             record.topic(), record.partition(), record.offset(), record.key(), record.value()));
                 }
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.error("Exception occurred while consuming messages : ", ex);
         } finally {
             kafkaConsumer.close();
         }
