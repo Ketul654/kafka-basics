@@ -28,7 +28,7 @@ public class KafkaCustomSerializerProducerApplication {
             for (int i = 0; i < 10; i++) {
                 Department department = Department.values()[new Random().nextInt(Department.values().length)];
                 Employee employee = new Employee(String.format("Employee %d", i), i, department);
-                ProducerRecord record = new ProducerRecord(KafkaConstants.SINGLE_PARTITION_TOPIC_NAME, Integer.toString(i), employee);
+                ProducerRecord record = new ProducerRecord(KafkaConstants.EMPLOYEE_TOPIC_NAME, Integer.toString(i), employee);
                 kafkaProducer.send(record);
             }
         } catch (Exception ex) {

@@ -5,6 +5,7 @@ public class KafkaConstants {
     public static final String BOOTSTRAP_SERVERS = "localhost:9092, localhost:9093, localhost:9094";
     public static final String SINGLE_PARTITION_TOPIC_NAME = "single-partition-topic";
     public static final String MULTI_PARTITION_TOPIC_NAME = "multi-partition-topic";
+    public static final String EMPLOYEE_TOPIC_NAME = "employee";
     public static final String COMPRESSION_TYPE = "gzip";
     public static final String CLIENT_DNS_LOOKUP = "resolve_canonical_bootstrap_servers_only";
     public static final String CLIENT_ID = "ketul-producer";

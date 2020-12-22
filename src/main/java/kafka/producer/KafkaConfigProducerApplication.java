@@ -11,7 +11,7 @@ import java.util.Properties;
 import java.util.UUID;
 
 public class KafkaConfigProducerApplication {
-    private static Logger logger = LoggerFactory.getLogger(KafkaConfigProducerApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaConfigProducerApplication.class);
 
     public static void main(String[] args) {
         Properties properties = new Properties();
@@ -54,12 +54,11 @@ public class KafkaConfigProducerApplication {
 
         properties.put(ProducerConfig.ACKS_CONFIG, acks);
         int numOfMessages = 100;
-        ProducerRecord record;
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer(properties);
         try {
             long startTime = System.currentTimeMillis();
             for (int i = 0; i < numOfMessages; i++) {
-                record = new ProducerRecord(KafkaConstants.SINGLE_PARTITION_TOPIC_NAME, String.format("Message with extra configs:%s", UUID.randomUUID().toString()));
+                ProducerRecord record = new ProducerRecord(KafkaConstants.SINGLE_PARTITION_TOPIC_NAME, String.format("Message with extra configs:%s", UUID.randomUUID().toString()));
                 kafkaProducer.send(record);
             }
             logger.info("Took {} ms to publish {} messages to {} topic with acknowledgement {}",

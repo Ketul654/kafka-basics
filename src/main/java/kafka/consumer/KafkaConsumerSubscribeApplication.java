@@ -26,11 +26,11 @@ public class KafkaConsumerSubscribeApplication {
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.BOOTSTRAP_SERVERS);
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, EmployeeDeserializer.class.getName());
-        //properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, UUID.randomUUID().toString());
 
         ArrayList<String> topics = new ArrayList<String>();
-        topics.add(KafkaConstants.SINGLE_PARTITION_TOPIC_NAME);
+        topics.add(KafkaConstants.EMPLOYEE_TOPIC_NAME);
 
         KafkaConsumer<String, Employee> kafkaConsumer = new KafkaConsumer<String, Employee>(properties);
         kafkaConsumer.subscribe(topics);
