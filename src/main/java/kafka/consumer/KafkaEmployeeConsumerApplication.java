@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.UUID;
 
-public class KafkaConsumerSubscribeApplication {
+public class KafkaEmployeeConsumerApplication {
 
-    private static final Logger logger = LoggerFactory.getLogger(KafkaConsumerSubscribeApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaEmployeeConsumerApplication.class);
 
     public static void main(String[] args) {
 

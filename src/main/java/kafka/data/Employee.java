@@ -26,6 +26,10 @@ public class Employee {
         return department;
     }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +
