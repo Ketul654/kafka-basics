@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Properties;
 import java.util.UUID;
 
-public class KafkaCompressedMessageProducerApplication {
-    private static final Logger logger = LoggerFactory.getLogger(KafkaCompressedMessageProducerApplication.class);
+public class KafkaAdvanceProducerApplication {
+    private static final Logger logger = LoggerFactory.getLogger(KafkaAdvanceProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();
@@ -45,11 +45,13 @@ public class KafkaCompressedMessageProducerApplication {
 
         /*
             Retry mechanism
-            Bring down 2 brokers and observe metrics
+            Change min.insync.replicas to 2 for all 3 brokers in broker configuration files and bounce them all.
+            Start producing messages. Bring down 2 brokers when producer is producing messages and observe metrics and logs.
+            Bring up brokers again and observe metrics and logs.
          */
         properties.put(ProducerConfig.RETRIES_CONFIG, KafkaConstants.RETRIES);
-        // This can make sure messages are in correct order
-        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 1);
+        // This can make sure messages are in correct order if set to 1
+        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, KafkaConstants.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION);
         properties.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, KafkaConstants.REQUEST_TIMEOUT_MS);
         // Try retry only after sometime
         properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, KafkaConstants.RETRY_BACKOFF_MS);
@@ -62,7 +64,7 @@ public class KafkaCompressedMessageProducerApplication {
         thread.start();
 
         try {
-            for (int i = 0; i < 10000000; i++) {
+            for (int i = 0; i < 1000; i++) {
                 ProducerRecord record = new ProducerRecord(KafkaConstants.MULTI_PARTITION_TOPIC_NAME, String.format("Compressed Message :%s", UUID.randomUUID().toString()));
                 kafkaProducer.send(record);
             }
