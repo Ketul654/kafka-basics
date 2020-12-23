@@ -10,6 +10,9 @@ public class KafkaConstants {
     public static final String CLIENT_DNS_LOOKUP = "resolve_canonical_bootstrap_servers_only";
     public static final String CLIENT_ID = "ketul's-producer";
     public static final String TRANSACTIONAL_ID = "tran-1";
+    public static final String ALL_BROKER_ACKS = "all";
+    public static final String ONLY_LEADER_ACKS = "1";
+    public static final String NO_ACKS = "0";
 
     public static final int RETRIES = 3;
     public static final int MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION = 5;

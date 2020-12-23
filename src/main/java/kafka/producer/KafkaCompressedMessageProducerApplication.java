@@ -8,7 +8,6 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.Properties;
 import java.util.UUID;
 
@@ -27,6 +26,16 @@ public class KafkaCompressedMessageProducerApplication {
         properties.put(ProducerConfig.BATCH_SIZE_CONFIG, KafkaConstants.BATCH_SIZE);
         properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, KafkaConstants.GZIP_COMPRESSION_TYPE);
 
+        /*
+         Change min.insync.replicas to 3 for all 3 brokers in broker configuration files and bounce them all.
+         Make acks to all.
+         Start this producer.
+         Kill one broker while this producer is running.
+         You should get exception for not having enough replicas.
+         Make the ACKS_CONFIG 1 and 0 and see what happens.
+         */
+        properties.put(ProducerConfig.ACKS_CONFIG, KafkaConstants.ALL_BROKER_ACKS);
+
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer(properties);
 
         // Stating metrics reporter
@@ -35,7 +44,7 @@ public class KafkaCompressedMessageProducerApplication {
         thread.start();
 
         try {
-            for (int i = 0; i < 1000000; i++) {
+            for (int i = 0; i < 10000000; i++) {
                 ProducerRecord record = new ProducerRecord(KafkaConstants.MULTI_PARTITION_TOPIC_NAME, String.format("Compressed Message :%s", UUID.randomUUID().toString()));
                 kafkaProducer.send(record);
             }

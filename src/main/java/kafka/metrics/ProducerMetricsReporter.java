@@ -5,31 +5,31 @@ import org.apache.kafka.common.Metric;
 import org.apache.kafka.common.MetricName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class ProducerMetricsReporter implements Runnable{
     private final Logger logger = LoggerFactory.getLogger(ProducerMetricsReporter.class);
-    private Producer<String, String> producer;
+    private final Producer<String, String> producer;
     private boolean isRunning = true;
-    private final Set<String> metricFilterNames = new HashSet<>();
+    private final Set<String> metricNamesFilter = new HashSet<>();
     public ProducerMetricsReporter(final Producer<String, String> producer) {
         this.producer = producer;
         initializeMetricNameFilter();
     }
 
     private void initializeMetricNameFilter() {
-        metricFilterNames.add("record-queue-time-avg");
-        metricFilterNames.add("record-send-rate");
-        metricFilterNames.add("records-per-request-avg");
-        metricFilterNames.add("request-size-max");
-        metricFilterNames.add("network-io-rate");
-        metricFilterNames.add("batch-size-avg");
-        metricFilterNames.add("response-rate");
-        metricFilterNames.add("requests-in-flight");
-        metricFilterNames.add("incoming-byte-rate");
+        metricNamesFilter.add("record-queue-time-avg");
+        metricNamesFilter.add("record-send-rate");
+        metricNamesFilter.add("records-per-request-avg");
+        metricNamesFilter.add("request-size-max");
+        metricNamesFilter.add("network-io-rate");
+        metricNamesFilter.add("batch-size-avg");
+        metricNamesFilter.add("response-rate");
+        metricNamesFilter.add("requests-in-flight");
+        metricNamesFilter.add("incoming-byte-rate");
+        metricNamesFilter.add("compression-rate-avg");
     }
 
     public void stop(){
@@ -51,11 +51,11 @@ public class ProducerMetricsReporter implements Runnable{
     }
 
     private void printMetrics(Map<MetricName,? extends Metric> metrics) {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder("\n");
         metrics.entrySet().stream()
-                .filter(metricNameEntry -> metricFilterNames.contains(metricNameEntry.getKey().name()))
+                .filter(metricNameEntry -> metricNamesFilter.contains(metricNameEntry.getKey().name()))
                 .forEach(metric ->
-                        builder.append(String.format("[%s,%s,%s]", metric.getKey().name(), metric.getKey().description(), metric.getValue().metricValue())));
+                        builder.append(String.format("[%s,%s,%s]\n", metric.getKey().name(), metric.getKey().description(), metric.getValue().metricValue())));
 
         logger.info(builder.toString());
     }
