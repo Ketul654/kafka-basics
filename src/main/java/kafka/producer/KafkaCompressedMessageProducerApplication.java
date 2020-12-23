@@ -43,6 +43,17 @@ public class KafkaCompressedMessageProducerApplication {
          */
         properties.put(ProducerConfig.ACKS_CONFIG, KafkaConstants.ALL_BROKER_ACKS);
 
+        /*
+            Retry mechanism
+            Bring down 2 brokers and observe metrics
+         */
+        properties.put(ProducerConfig.RETRIES_CONFIG, KafkaConstants.RETRIES);
+        // This can make sure messages are in correct order
+        properties.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, 1);
+        properties.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, KafkaConstants.REQUEST_TIMEOUT_MS);
+        // Try retry only after sometime
+        properties.put(ProducerConfig.RETRY_BACKOFF_MS_CONFIG, KafkaConstants.RETRY_BACKOFF_MS);
+
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer(properties);
 
         // Stating metrics reporter
