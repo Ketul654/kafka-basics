@@ -21,9 +21,14 @@ public class KafkaCompressedMessageProducerApplication {
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
-        // Batching and compression configs
+        /*
+         Batching and compression configs
+         Enable batching and try different linger time and batch size. Observer metrics.
+         Disable batching and observe metrics. You can disable batching by setting BATCH_SIZE_CONFIG to 0.
+         */
         properties.put(ProducerConfig.LINGER_MS_CONFIG, KafkaConstants.LINGER_MS);
         properties.put(ProducerConfig.BATCH_SIZE_CONFIG, KafkaConstants.BATCH_SIZE);
+        //properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 0);
         properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, KafkaConstants.GZIP_COMPRESSION_TYPE);
 
         /*
