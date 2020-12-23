@@ -15,6 +15,8 @@ public class KafkaConstants {
     public static final String ONLY_LEADER_ACKS = "1";
     public static final String NO_ACKS = "0";
 
+    public static final String CONSUMER_GROUP_1_ID = "consumer-group-1";
+
     public static final int RETRIES = 3;
     public static final int MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION = 5;
     public static final int RETRY_BACKOFF_MS = 1000;

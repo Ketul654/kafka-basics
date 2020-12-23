@@ -161,6 +161,20 @@
   >name:ketul
   >localtion:glasgow
   ```
+  
+* Tool to test producer performance
+
+  ```$xslt
+  [ kafka_2.13-2.6.0 % bin/kafka-producer-perf-test.sh --topic single-partition-topic \
+  --num-records 100 \
+  --record-size 50 \
+  --throughput 10 \
+  --producer-props bootstrap.servers=localhost:9092 \
+    key.serializer=org.apache.kafka.common.serialization.StringSerializer \
+    value.serializer=org.apache.kafka.common.serialization.StringSerializer
+  51 records sent, 10.2 records/sec (0.00 MB/sec), 26.5 ms avg latency, 1116.0 ms max latency.
+  100 records sent, 10.079629 records/sec (0.00 MB/sec), 14.42 ms avg latency, 1116.00 ms max latency, 2 ms 50th, 12 ms 95th, 1116 ms 99th, 1116 ms 99.9th.
+  ```  
 ## Kafka Console Consumer
 
 * Start console consumer to consume messages produced by producer
@@ -192,7 +206,7 @@
   5	Message 5 to direct partition 1:2f108526-327c-4fcf-b4ba-8d45dc9fab71
   ```
   
- ## Replication
+ ## Replication Verification
  
  * Start replication verification on terminal when producer is producing messages. 
    
