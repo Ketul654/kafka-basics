@@ -18,6 +18,11 @@ import java.util.Properties;
  * Start all the consumers from consumer group. Publish messages on subscribed topics. See how consumers consume messages.
  * Kill consumer and see how re-balances occur.
  * Add more consumers in consumer group and see what happens.
+ *
+ * Maximum number of consumers in a group = number of partitions in a topic. Extra consumer will be ideal.
+ *
+ * i.e. if 4 consumers are subscribed to a topic with partitions 3, one consumer will be ideal.
+ * if 2 consumers are subscribed to a topic with partitions 3, one consumer will consume from 2 partitions and other will from 1 partition.
  */
 public class KafkaConsumerGroupApplication0 {
 
