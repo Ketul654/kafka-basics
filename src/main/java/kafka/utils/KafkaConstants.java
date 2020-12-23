@@ -37,6 +37,7 @@ public class KafkaConstants {
     public static final int FETCH_MAX_WAIT_MS = 10000;
     public static final int MAX_PARTITION_FETCH_BYTES = 20 * 1024;
     public static final int MAX_POLL_RECORDS = 2000;
+    public static final int MAX_POLL_INTERVAL_MS = 100;
 
     public static final boolean ENABLE_IDEMPOTENCE = true;
 

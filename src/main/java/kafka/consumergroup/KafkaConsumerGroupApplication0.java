@@ -35,6 +35,11 @@ public class KafkaConsumerGroupApplication0 {
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, KafkaConstants.CONSUMER_GROUP_1_ID);
 
+        /*
+        Limiting maximum delay between two poll calls. If that exceeds, consumer will be considered fail and re-balance will happen.
+         */
+        properties.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, KafkaConstants.MAX_POLL_INTERVAL_MS);
+
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(properties);
 
         ArrayList<String> topics = new ArrayList<String>();
@@ -51,6 +56,11 @@ public class KafkaConsumerGroupApplication0 {
                     LOGGER.info(String.format("Topic : %s, Partition : %s, Offset : %s, Key : %s, Value : %s",
                             record.topic(), record.partition(), record.offset(), record.key(), record.value()));
                 }
+
+                /*
+                Sleeping to test max.poll.interval.ms
+                 */
+                Thread.sleep(KafkaConstants.MAX_POLL_INTERVAL_MS + 1000);
             }
         } catch (Exception ex) {
             LOGGER.error("Exception occurred while consuming messages : ", ex);
