@@ -86,6 +86,29 @@ public class KafkaConsumerAssignApplication {
 
         kafkaConsumer.assign(partitions);
 
+        /*
+        Go to a specific offset
+         */
+        kafkaConsumer.seek(single0, 3950);
+
+        LOGGER.info("Current position of {} : {}", single0.toString(), kafkaConsumer.position(single0));
+
+        /*
+        Go to end of partition
+         */
+        ArrayList<TopicPartition> partitionsToSeek = new ArrayList<>();
+        partitionsToSeek.add(single0);
+        kafkaConsumer.seekToEnd(partitionsToSeek);
+
+        LOGGER.info("Current position of {} : {}", single0.toString(), kafkaConsumer.position(single0));
+
+        /*
+        Move to beginning
+         */
+        kafkaConsumer.seekToBeginning(partitionsToSeek);
+
+        LOGGER.info("Current position of {} : {}", single0.toString(), kafkaConsumer.position(single0));
+
         try {
             while (true) {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(10000));
