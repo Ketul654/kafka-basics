@@ -10,8 +10,11 @@ import org.slf4j.LoggerFactory;
 import java.util.Properties;
 import java.util.UUID;
 
+/**
+ * Play around with majority of important producer configurations
+ */
 public class KafkaConfigProducerApplication {
-    private static final Logger logger = LoggerFactory.getLogger(KafkaConfigProducerApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConfigProducerApplication.class);
 
     public static void main(String[] args) {
         Properties properties = new Properties();
@@ -61,10 +64,10 @@ public class KafkaConfigProducerApplication {
                 ProducerRecord record = new ProducerRecord(KafkaConstants.SINGLE_PARTITION_TOPIC_NAME, String.format("Message with extra configs:%s", UUID.randomUUID().toString()));
                 kafkaProducer.send(record);
             }
-            logger.info("Took {} ms to publish {} messages to {} topic with acknowledgement {}",
+            LOGGER.info("Took {} ms to publish {} messages to {} topic with acknowledgement {}",
                     System.currentTimeMillis() - startTime, numOfMessages, KafkaConstants.SINGLE_PARTITION_TOPIC_NAME, acks);
         } catch (Exception ex) {
-            logger.error("Exception occurred while producing message : ", ex);
+            LOGGER.error("Exception occurred while producing message : ", ex);
         } finally {
             kafkaProducer.close();
         }

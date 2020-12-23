@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class EmployeeSerializer implements Serializer<Employee> {
 
-    private final Logger logger = LoggerFactory.getLogger(EmployeeSerializer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeSerializer.class);
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        logger.info("Initializing Employee Serializer with {} configs", configs);
+        LOGGER.info("Initializing Employee Serializer with {} configs", configs);
     }
 
     @Override
@@ -24,13 +24,13 @@ public class EmployeeSerializer implements Serializer<Employee> {
         try {
             serializedData = mapper.writeValueAsString(employee).getBytes();
         } catch (JsonProcessingException e) {
-            logger.error("Error occurred while serialising employee data : ", e);
+            LOGGER.error("Error occurred while serialising employee data : ", e);
         }
         return serializedData;
     }
 
     @Override
     public void close() {
-        logger.info("Closing Employee Serializer");
+        LOGGER.info("Closing Employee Serializer");
     }
 }

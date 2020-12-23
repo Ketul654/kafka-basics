@@ -7,7 +7,6 @@ import kafka.serde.EmployeeSerializer;
 import kafka.utils.KafkaConstants;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerInterceptor;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.slf4j.Logger;
@@ -15,8 +14,12 @@ import org.slf4j.LoggerFactory;
 import java.util.Properties;
 import java.util.Random;
 
+/**
+ * This uses custom serializer EmployeeSerializer to serialize Employee object
+ * EmployeeProducerInterceptor is used to limit age below 100 before sending data to brokers
+ */
 public class KafkaEmployeeProducerApplication {
-    private static final Logger logger = LoggerFactory.getLogger(KafkaCustomPartitionerProducerApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaCustomPartitionerProducerApplication.class);
 
     public static void main(String[] args) {
         Properties properties = new Properties();
@@ -37,7 +40,7 @@ public class KafkaEmployeeProducerApplication {
                 kafkaProducer.send(record);
             }
         } catch (Exception ex) {
-            logger.error("Exception occurred while producing message : ", ex);
+            LOGGER.error("Exception occurred while producing message : ", ex);
         } finally {
             kafkaProducer.close();
         }

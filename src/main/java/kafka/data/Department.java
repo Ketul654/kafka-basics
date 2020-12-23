@@ -1,10 +1,11 @@
 package kafka.data;
 
 public enum Department {
-    COMPUTER_ENGINEERING("Computer Engineering"),
-    CIVIL_ENGINEERING("Civil Engineering"),
-    IT_ENGINEERING("Information Technology Engineering"),
-    MECHANICAL_ENGINEERING("Mechanical Engineering");
+    HR("Human Resource"),
+    IT("Information Technology"),
+    FINANCE("Finance"),
+    RECOVERY("Recovery"),
+    LOAN("Loan");
 
     private final String departmentName;
 

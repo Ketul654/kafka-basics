@@ -17,9 +17,12 @@ import java.util.UUID;
  * Start this consumer
  * Start Kafka Advance Producer with different acks, linger.ms, batch.size, compression.type and max.in.flight.requests.per.connection
  * Enable/Disable compression, enable/disable batching, enable/disable acks, increase/decrease linger.ms and batch.size and see the difference
+ * Test this with synchronous producer and see the difference
  */
 public class KafkaConsumerLatencyCalculatorApplication {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumerLatencyCalculatorApplication.class);
+
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.BOOTSTRAP_SERVERS);

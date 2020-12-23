@@ -12,8 +12,12 @@ import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.Future;
 
+/**
+ * Message will be sent synchronously to topic
+ * Make it asynchronous by removing future.get() call and check the difference
+ */
 public class KafkaSynchronousProducerApplication {
-    private static final Logger logger = LoggerFactory.getLogger(KafkaSynchronousProducerApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaSynchronousProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();
@@ -28,10 +32,10 @@ public class KafkaSynchronousProducerApplication {
                 String message = String.format("Synchronously sent message %d:%s", i, UUID.randomUUID().toString());
                 Future<RecordMetadata> future = kafkaProducer.send(new ProducerRecord(KafkaConstants.MULTI_PARTITION_TOPIC_NAME, message));
                 RecordMetadata metadata = future.get();
-                logger.info("Message {} has been sent on topic {} and partition {} with timestamp {}", message, metadata.topic(), metadata.partition(), metadata.timestamp());
+                LOGGER.info("Message {} has been sent on topic {} and partition {} with timestamp {}", message, metadata.topic(), metadata.partition(), metadata.timestamp());
             }
         } catch (Exception ex) {
-            logger.error("Exception occurred while producing message : ", ex);
+            LOGGER.error("Exception occurred while producing message : ", ex);
         } finally {
             kafkaProducer.close();
         }

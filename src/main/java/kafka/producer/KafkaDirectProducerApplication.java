@@ -11,8 +11,11 @@ import org.slf4j.LoggerFactory;
 import java.util.Properties;
 import java.util.UUID;
 
+/**
+ * This will publish messages to specific partition passed in producer records
+ */
 public class KafkaDirectProducerApplication {
-    private static final Logger logger = LoggerFactory.getLogger(KafkaDirectProducerApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaDirectProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();
@@ -33,7 +36,7 @@ public class KafkaDirectProducerApplication {
                 kafkaProducer.send(record);
             }
         } catch (Exception ex) {
-            logger.error("Exception occurred while producing message : ", ex);
+            LOGGER.error("Exception occurred while producing message : ", ex);
         } finally {
             kafkaProducer.close();
         }

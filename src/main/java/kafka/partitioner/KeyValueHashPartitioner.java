@@ -9,8 +9,11 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Custom partitioner to decide partition to send message to
+ */
 public class KeyValueHashPartitioner implements Partitioner {
-    private static final Logger logger = LoggerFactory.getLogger(KeyValueHashPartitioner.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KeyValueHashPartitioner.class);
     @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
         List<PartitionInfo> partitions = cluster.partitionsForTopic(topic);
@@ -23,18 +26,18 @@ public class KeyValueHashPartitioner implements Partitioner {
             String strVal = (String)value;
             int keyHash = strKey.hashCode();
             int valHash = strVal.hashCode();
-            int maxHash = keyHash>=valHash ? keyHash : valHash;
+            int maxHash = Math.max(keyHash, valHash);
             return maxHash%numberOfPartitions;
         }
     }
 
     @Override
     public void close() {
-        logger.info("Closing custom partitioner");
+        LOGGER.info("Closing custom partitioner");
     }
 
     @Override
     public void configure(Map<String, ?> map) {
-        logger.info("Initializing custom partitioner");
+        LOGGER.info("Initializing custom partitioner");
     }
 }

@@ -13,8 +13,13 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Properties;
 
+/**
+ * Consume messages from specific topics of partitions
+ */
 public class KafkaConsumerAssignApplication {
-    private static final Logger logger = LoggerFactory.getLogger(KafkaConsumerAssignApplication.class);
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumerAssignApplication.class);
+
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaConstants.BOOTSTRAP_SERVERS);
@@ -36,12 +41,12 @@ public class KafkaConsumerAssignApplication {
             while (true) {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(Duration.ofMillis(10));
                 for (ConsumerRecord<String, String> record : records) {
-                    logger.info(String.format("Topic : %s, Partition : %s, Offset : %s, Key : %s, Value : %s",
+                    LOGGER.info(String.format("Topic : %s, Partition : %s, Offset : %s, Key : %s, Value : %s",
                             record.topic(), record.partition(), record.offset(), record.key(), record.value()));
                 }
             }
         } catch (Exception ex) {
-            logger.error("Exception occurred while consuming messages : ", ex);
+            LOGGER.error("Exception occurred while consuming messages : ", ex);
         } finally {
             kafkaConsumer.close();
         }

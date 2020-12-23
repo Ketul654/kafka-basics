@@ -11,8 +11,12 @@ import org.slf4j.LoggerFactory;
 import java.util.Properties;
 import java.util.UUID;
 
+/**
+ * This has advance configurations for acks, batching, retry, compression etc.
+ * We can play around these configurations and check metrics logs to understand the impact.
+ */
 public class KafkaAdvanceProducerApplication {
-    private static final Logger logger = LoggerFactory.getLogger(KafkaAdvanceProducerApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaAdvanceProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();
@@ -69,7 +73,7 @@ public class KafkaAdvanceProducerApplication {
                 kafkaProducer.send(record);
             }
         } catch (Exception ex) {
-            logger.error("Exception occurred while producing message : ", ex);
+            LOGGER.error("Exception occurred while producing message : ", ex);
         } finally {
             kafkaProducer.close();
             reporter.stop();

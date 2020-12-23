@@ -12,8 +12,11 @@ import org.slf4j.LoggerFactory;
 import java.util.Properties;
 import java.util.UUID;
 
+/**
+ * Custom KeyValueHashPartitioner partitioner will be used to decide which partition data should be published to
+ */
 public class KafkaCustomPartitionerProducerApplication {
-    private static final Logger logger = LoggerFactory.getLogger(KafkaCustomPartitionerProducerApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaCustomPartitionerProducerApplication.class);
     public static void main(String[] args) {
 
         Properties properties = new Properties();
@@ -37,7 +40,7 @@ public class KafkaCustomPartitionerProducerApplication {
 
             }
         } catch (Exception ex) {
-            logger.error("Exception occurred while producing message : ", ex);
+            LOGGER.error("Exception occurred while producing message : ", ex);
         } finally {
             kafkaProducer.close();
         }

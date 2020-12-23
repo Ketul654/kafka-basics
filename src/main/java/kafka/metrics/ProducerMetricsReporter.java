@@ -9,11 +9,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * This prints producer metrics which can be used to optimize producer
+ */
 public class ProducerMetricsReporter implements Runnable{
-    private final Logger logger = LoggerFactory.getLogger(ProducerMetricsReporter.class);
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProducerMetricsReporter.class);
     private final Producer<String, String> producer;
-    private boolean isRunning = true;
     private final Set<String> metricNamesFilter = new HashSet<>();
+    private boolean isRunning = true;
+
     public ProducerMetricsReporter(final Producer<String, String> producer) {
         this.producer = producer;
         initializeMetricNameFilter();
@@ -44,10 +49,10 @@ public class ProducerMetricsReporter implements Runnable{
                 printMetrics(metrics);
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
-                logger.error("Metrics thread has been interrupted : ", e);
+                LOGGER.error("Metrics thread has been interrupted : ", e);
             }
         }
-        logger.info("Stopping metrics reporter");
+        LOGGER.info("Stopping metrics reporter");
     }
 
     private void printMetrics(Map<MetricName,? extends Metric> metrics) {
@@ -57,6 +62,6 @@ public class ProducerMetricsReporter implements Runnable{
                 .forEach(metric ->
                         builder.append(String.format("[%s,%s,%s]\n", metric.getKey().name(), metric.getKey().description(), metric.getValue().metricValue())));
 
-        logger.info(builder.toString());
+        LOGGER.info(builder.toString());
     }
 }

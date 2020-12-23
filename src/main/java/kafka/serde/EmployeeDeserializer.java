@@ -11,12 +11,15 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * Custom Employee deserializer
+ */
 public class EmployeeDeserializer implements Deserializer<Employee> {
-    private final Logger logger = LoggerFactory.getLogger(EmployeeDeserializer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeDeserializer.class);
 
     @Override
     public void configure(Map<String, ?> configs, boolean isKey) {
-        logger.info("Initializing Employee deserializer with {} configs", configs);
+        LOGGER.info("Initializing Employee deserializer with {} configs", configs);
     }
 
     @Override
@@ -26,17 +29,17 @@ public class EmployeeDeserializer implements Deserializer<Employee> {
         try {
             employee = mapper.readValue(bytes, Employee.class);
         } catch (JsonParseException e) {
-            logger.error("Exception occurred while parsing employee Json : ", e);
+            LOGGER.error("Exception occurred while parsing employee Json : ", e);
         } catch (JsonMappingException e) {
-            logger.error("Exception occurred while mapping employee Json : ", e);
+            LOGGER.error("Exception occurred while mapping employee Json : ", e);
         } catch (IOException e) {
-            logger.error("IO Exception occurred while deserializing employee data : ", e);
+            LOGGER.error("IO Exception occurred while deserializing employee data : ", e);
         }
         return employee;
     }
 
     @Override
     public void close() {
-        logger.info("Closing Employee Deserializer");
+        LOGGER.info("Closing Employee Deserializer");
     }
 }
