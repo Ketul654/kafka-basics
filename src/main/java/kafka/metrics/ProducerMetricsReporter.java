@@ -42,7 +42,7 @@ public class ProducerMetricsReporter implements Runnable{
             try {
                 final Map<MetricName, ? extends Metric> metrics = producer.metrics();
                 printMetrics(metrics);
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 logger.error("Metrics thread has been interrupted : ", e);
             }

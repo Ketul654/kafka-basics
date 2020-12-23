@@ -191,3 +191,13 @@
   4	Message 4 to direct partition 1:431dcc32-ba86-49b8-9386-a81b9f2e206e
   5	Message 5 to direct partition 1:2f108526-327c-4fcf-b4ba-8d45dc9fab71
   ```
+  
+ ## Replication
+ 
+ * Start replication verification on terminal when producer is producing messages. 
+   
+   ```$xslt
+   bin/kafka-replica-verification.sh --report-interval-ms 5000 \
+   --topic-white-list multi-partition-topic \
+   --broker-list "localhost:9092, localhost:9093, localhost:9094"
+   ```

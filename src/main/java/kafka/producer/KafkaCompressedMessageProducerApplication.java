@@ -31,7 +31,9 @@ public class KafkaCompressedMessageProducerApplication {
          Make acks to all.
          Start this producer.
          Kill one broker while this producer is running.
+         Describe topic and observer changes in isr.
          You should get exception for not having enough replicas.
+         Start replication verification on terminal and observe what happens.
          Make the ACKS_CONFIG 1 and 0 and see what happens.
          */
         properties.put(ProducerConfig.ACKS_CONFIG, KafkaConstants.ALL_BROKER_ACKS);
