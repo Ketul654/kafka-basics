@@ -32,6 +32,11 @@ public class KafkaConstants {
     public static final int RECONNECT_BACKOFF_MS = 200;
     public static final int RECONNECT_BACKOFF_MAX_MS = 10000;
     public static final int TRANSACTION_TIMEOUT = 30000;
+    public static final int FETCH_MIN_BYTES = 5 * 1024;
+    public static final int FETCH_MAX_BYTES = 10 * 1024;
+    public static final int FETCH_MAX_WAIT_MS = 10000;
+    public static final int MAX_PARTITION_FETCH_BYTES = 20 * 1024;
+    public static final int MAX_POLL_RECORDS = 2000;
 
     public static final boolean ENABLE_IDEMPOTENCE = true;
 
