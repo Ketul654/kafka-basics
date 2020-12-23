@@ -1,5 +1,6 @@
 package kafka.consumergroup;
 
+import kafka.listener.CustomRebalanceListener;
 import kafka.utils.KafkaConstants;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -32,7 +33,7 @@ public class KafkaConsumerGroupApplication3 {
         topics.add(KafkaConstants.SINGLE_PARTITION_TOPIC_NAME);
         topics.add(KafkaConstants.MULTI_PARTITION_TOPIC_NAME);
 
-        kafkaConsumer.subscribe(topics);
+        kafkaConsumer.subscribe(topics, new CustomRebalanceListener(kafkaConsumer));
 
         try {
             while (true) {

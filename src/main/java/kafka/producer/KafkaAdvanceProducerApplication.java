@@ -68,7 +68,7 @@ public class KafkaAdvanceProducerApplication {
         thread.start();
 
         try {
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < 100000000; i++) {
                 ProducerRecord record = new ProducerRecord(KafkaConstants.MULTI_PARTITION_TOPIC_NAME, String.format("Compressed Message :%s", UUID.randomUUID().toString()));
                 kafkaProducer.send(record);
             }
