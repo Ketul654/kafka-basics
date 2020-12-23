@@ -23,13 +23,13 @@ public class KafkaCompressedMessageProducerApplication {
 
         /*
          Batching and compression configs
-         Enable batching and try different linger time and batch size. Observer metrics.
-         Disable batching and observe metrics. You can disable batching by setting BATCH_SIZE_CONFIG to 0.
+         Enable batching and try different linger time, batch size and compression. Observer metrics.
+         Disable batching and compression and observe metrics. You can disable batching by setting BATCH_SIZE_CONFIG to 0.
          */
         properties.put(ProducerConfig.LINGER_MS_CONFIG, KafkaConstants.LINGER_MS);
         properties.put(ProducerConfig.BATCH_SIZE_CONFIG, KafkaConstants.BATCH_SIZE);
         //properties.put(ProducerConfig.BATCH_SIZE_CONFIG, 0);
-        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, KafkaConstants.GZIP_COMPRESSION_TYPE);
+        properties.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, KafkaConstants.SNAPPY_COMPRESSION_TYPE);
 
         /*
          Change min.insync.replicas to 3 for all 3 brokers in broker configuration files and bounce them all.

@@ -7,6 +7,7 @@ public class KafkaConstants {
     public static final String MULTI_PARTITION_TOPIC_NAME = "multi-partition-topic";
     public static final String EMPLOYEE_TOPIC_NAME = "employee";
     public static final String GZIP_COMPRESSION_TYPE = "gzip";
+    public static final String SNAPPY_COMPRESSION_TYPE = "snappy";
     public static final String CLIENT_DNS_LOOKUP = "resolve_canonical_bootstrap_servers_only";
     public static final String CLIENT_ID = "ketul's-producer";
     public static final String TRANSACTIONAL_ID = "tran-1";
