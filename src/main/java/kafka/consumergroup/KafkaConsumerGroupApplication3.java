@@ -12,6 +12,9 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Properties;
 
+/**
+ * Consumer 3 of consumer group
+ */
 public class KafkaConsumerGroupApplication3 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumerGroupApplication3.class);
