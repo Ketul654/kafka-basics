@@ -10,12 +10,15 @@ public class KafkaConstants {
     public static final String SNAPPY_COMPRESSION_TYPE = "snappy";
     public static final String CLIENT_DNS_LOOKUP = "resolve_canonical_bootstrap_servers_only";
     public static final String CLIENT_ID = "ketul's-producer";
-    public static final String TRANSACTIONAL_ID = "tran-1";
+    public static final String TRANSACTIONAL_ID = "transaction-1";
     public static final String ALL_BROKER_ACKS = "all";
     public static final String ONLY_LEADER_ACKS = "1";
     public static final String NO_ACKS = "0";
 
     public static final String CONSUMER_GROUP_1_ID = "consumer-group-1";
+
+    public static final String ISOLATION_LEVEL_COMMITTED = "read_committed";
+    public static final String ISOLATION_LEVEL_UNCOMMITTED = "read_uncommitted";
 
     public static final int RETRIES = 3;
     public static final int MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION = 5;
