@@ -137,7 +137,7 @@ public class KafkaAdvanceConsumerApplication {
                     }
                 });
 
-                if(System.currentTimeMillis() - startTime > pauseMs) {
+                if(System.currentTimeMillis() - startTime > pauseMs && kafkaConsumer.paused().size() > 0) {
                     LOGGER.info("Resuming partitions {}", kafkaConsumer.paused().toString());
                     kafkaConsumer.resume(kafkaConsumer.paused());
                 }
