@@ -48,6 +48,16 @@ public class KafkaAdvanceProducerApplication {
         properties.put(ProducerConfig.ACKS_CONFIG, KafkaConstants.ALL_BROKER_ACKS);
 
         /*
+        When this is set to true, it enables idempotent producer which ensures exactly one copy of message is written to broker even if it is sent many times in the event of failure
+        This requires acks to all otherwise idempotent producer will fail to start as it cannot guarantee idempotence if acks is not all.
+        This can still give ordering guarantee with max.in.flight.requests.per.connection<=5.
+        max.in.flight.requests.per.connection does not have to be 1 for idempotent producer to get ordering guarantee.
+        This also requires retries to be non zero otherwise it will fail to start
+        Observe the metric with and without idempotence
+         */
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, KafkaConstants.ENABLE_IDEMPOTENCE);
+
+        /*
             Retry mechanism
             Change min.insync.replicas to 2 for all 3 brokers in broker configuration files and bounce them all.
             Start producing messages. Bring down 2 brokers when producer is producing messages and observe metrics and logs.
