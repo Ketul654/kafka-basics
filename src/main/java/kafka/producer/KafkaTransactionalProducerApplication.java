@@ -27,6 +27,10 @@ public class KafkaTransactionalProducerApplication {
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
+        // This configs will help to make sure that producer will not produce duplicate messages
+        properties.put(ProducerConfig.ACKS_CONFIG, KafkaConstants.ALL_BROKER_ACKS);
+        properties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, KafkaConstants.ENABLE_IDEMPOTENCE);
+
         // Transaction configuration
         properties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, KafkaConstants.TRANSACTIONAL_ID);
         properties.put(ProducerConfig.TRANSACTION_TIMEOUT_CONFIG, KafkaConstants.TRANSACTION_TIMEOUT);
