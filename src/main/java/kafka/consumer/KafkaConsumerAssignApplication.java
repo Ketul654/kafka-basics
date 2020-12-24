@@ -103,6 +103,14 @@ public class KafkaConsumerAssignApplication {
         LOGGER.info("Current position of {} : {}", single0.toString(), kafkaConsumer.position(single0));
 
         /*
+        Pausing partition for a minute
+         */
+        long pauseMs = 60000;
+        LOGGER.info("Pausing partitions {} for {}", partitionsToSeek, pauseMs);
+        kafkaConsumer.pause(partitionsToSeek);
+        long startTime = System.currentTimeMillis();
+
+        /*
         Move to beginning
          */
         kafkaConsumer.seekToBeginning(partitionsToSeek);
@@ -128,6 +136,11 @@ public class KafkaConsumerAssignApplication {
                         map.entrySet().stream().forEach(offsetMap -> LOGGER.info("Committed offset : {} : {}", offsetMap.getKey().toString(), offsetMap.getValue().toString()));
                     }
                 });
+
+                if(System.currentTimeMillis() - startTime > pauseMs) {
+                    LOGGER.info("Resuming partitions {}", kafkaConsumer.paused().toString());
+                    kafkaConsumer.resume(kafkaConsumer.paused());
+                }
             }
         } catch (Exception ex) {
             LOGGER.error("Exception occurred while consuming messages : ", ex);
