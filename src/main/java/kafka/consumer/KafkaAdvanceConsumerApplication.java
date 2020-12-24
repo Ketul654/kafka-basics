@@ -15,9 +15,9 @@ import java.util.UUID;
 /**
  * Consume messages from specific topics of partitions with advance settings
  */
-public class KafkaConsumerAssignApplication {
+public class KafkaAdvanceConsumerApplication {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaConsumerAssignApplication.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(KafkaAdvanceConsumerApplication.class);
 
     public static void main(String[] args) {
         Properties properties = new Properties();
