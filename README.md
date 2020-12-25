@@ -7,7 +7,7 @@ This has few kafka producer/consumer applications with basic and some advance ka
 
 Follow instructions mentioned in each application class on how to run and what to expect/observe.
 
-This uses java 8 and kafka 0.2.6 for development on Mac OS.
+This uses java 8 and kafka 2.6.0 for development on Mac OS.
 
 ## Kafka Cluster Setup
 
