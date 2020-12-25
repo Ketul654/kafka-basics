@@ -1,4 +1,14 @@
 # Kafka Basics
+
+## About
+This has few kafka producer/consumer applications with basic and some advance kafka concepts i.e. different types of producers and consumers applications with custom serializer/deserializer, partitioner, interceptor, rebalance listener, metrics reporter and advance configurations. Idempotent and transactional producer and transactional consumer applications have also been implemented to produce and consume messages transactionally which can guarantee exactly once end-to-end semantics. This also has admin client demo to create, describe and delete topics and delete records. 
+
+```Kafka Cluster Setup``` section will help to setup kafka on local Mac machine. Refer other sections for more help on topic, producer, consumer and replication.
+
+Follow instructions mentioned in each application class on how to run and what to expect/observe.
+
+This uses java 8 and kafka 0.2.6 for development on Mac OS.
+
 ## Kafka Cluster Setup
 
 #### Follow below steps to set up 3 node cluster on single Mac machine
